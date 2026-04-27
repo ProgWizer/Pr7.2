@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using VigenereApp;
+
+namespace Pr7._2
+{
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+        private void Encrypt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = txtInput.Text;
+                string key = txtKey.Text;
+
+                txtOutput.Text = VigenereCipher.EncryptVigenere(text, key);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void Decrypt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string cipher = txtInput.Text;
+                string key = txtKey.Text;
+
+                txtOutput.Text = VigenereCipher.DecryptVigenere(cipher, key);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            txtInput.Clear();
+            txtKey.Clear();
+            txtOutput.Clear();
+        }
+    }
+
+}
+
